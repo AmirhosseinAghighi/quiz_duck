@@ -45,9 +45,12 @@ const Loading = ({ navigate = false }: Props) => {
 
   useEffect(() => {
     axios
-      .post<{ avatarUrl: string }>("https://api.ble.ir/api/v1/LoadUser", {
-        userID: userData.id,
-      })
+      .post<{ avatarUrl: string }>(
+        "https://88e7-23-157-40-95.ngrok-free.app/proxy/load-user",
+        {
+          userID: userData.id,
+        }
+      )
       .then((res) => {
         const data = res.data;
         if (data.avatarUrl === "") {
