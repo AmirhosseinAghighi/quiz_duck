@@ -17,7 +17,7 @@ const Loading = ({ navigate = false }: Props) => {
       setTimeout(() => {
         setProgress(() => progress + 1);
         if (progress === 100) {
-          navigateTo("/home");
+          // navigateTo("/home");
         } else if (progress === 2) {
           setSpeed(50);
         } else if (progress === 50) {

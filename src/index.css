@@ -8,6 +8,10 @@ body {
     align-items: center;
 }
 
+#root {
+    width: 100%;
+}
+
 .bg-pattern{
     content: "";
     background-image: url("/src/assets/pattern.svg");

@@ -4,7 +4,7 @@ interface Props {
   className?: string;
 }
 
-const Porfile = ({ className }: Props) => {
+const Profile = ({ className }: Props) => {
   return (
     <div className={"h-100 bg-main_pink rounded-2xl " + className}>
       <div className="flex items-center p-4">
@@ -22,4 +22,4 @@ const Porfile = ({ className }: Props) => {
   );
 };
 
-export default Porfile;
+export default Profile;

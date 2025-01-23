@@ -36,8 +36,10 @@ const CreateGameCards = ({ mode }: Props) => {
     >
       <img src={Modes[mode].banner} alt="banner" className={"w-1/2 h-full"} />
       <div className="flex flex-col justify-center text-white mr-4">
-        <h1 className="font-extrabold text-4xl">{Modes[mode].title}</h1>
-        <p className="text-md text-text-gray font-bold mt-2">
+        <h1 className="font-extrabold text-2xl sm:text-4xl">
+          {Modes[mode].title}
+        </h1>
+        <p className="text-md text-text-gray font-bold mt-2 text-sm sm:text-lg">
           {Modes[mode].desc}
         </p>
       </div>
