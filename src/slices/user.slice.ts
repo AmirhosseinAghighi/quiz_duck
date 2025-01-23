@@ -2,7 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 //@ts-ignore
-const data = window.Bale.initData.user;
+const data = window.Bale.initData.user ?? {
+  allows_write_to_pm: false,
+  first_name: "",
+  id: 0,
+  username: "",
+};
 
 interface AuthSlice {
   allows_write_to_pm: boolean;
