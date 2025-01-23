@@ -29,7 +29,7 @@ const Loading = ({ navigate = false }: Props) => {
             navigateTo("/home");
           } else {
             //@ts-ignore
-            window.WebApp.close();
+            window.Bale.WebApp.close();
           }
         } else if (progress === 2) {
           setSpeed(50);
@@ -61,7 +61,7 @@ const Loading = ({ navigate = false }: Props) => {
       .catch((err) => {
         debug(err.message);
         //@ts-ignore
-        window.WebApp.close();
+        window.Bale.WebApp.close();
       });
   }, []);
 
