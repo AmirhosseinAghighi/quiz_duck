@@ -21,6 +21,7 @@ const Loading = ({ navigate = false }: Props) => {
   const { debug } = useLogger();
 
   useEffect(() => {
+    console.log("!@!", userData);
     if (navigate) {
       setTimeout(() => {
         setProgress(() => progress + 1);
