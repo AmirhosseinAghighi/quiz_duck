@@ -53,6 +53,7 @@ const Loading = ({ navigate = false }: Props) => {
       )
       .then((res) => {
         const data = res.data;
+        console.log("!@! 2", res, data, res.data, data.avatarUrl);
         if (data.avatarUrl === "") {
           dispatch(
             authActions.setAvatarUrl(
