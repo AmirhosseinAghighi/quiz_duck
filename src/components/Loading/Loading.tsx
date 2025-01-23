@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import pattern from "../../assets/pattern.svg";
 import duck from "../../assets/duck-doctor.png";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userSelector } from "../../slices/user.selector";
+import axios from "axios";
+import { authActions } from "../../slices/user.slice";
 
 interface Props {
   navigate?: boolean;
@@ -11,13 +15,20 @@ const Loading = ({ navigate = false }: Props) => {
   const [progress, setProgress] = useState(0);
   const [speed, setSpeed] = useState(1000);
   const navigateTo = useNavigate();
+  const userData = useSelector(userSelector);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (navigate) {
       setTimeout(() => {
         setProgress(() => progress + 1);
         if (progress === 100) {
-          navigateTo("/home");
+          if (userData.photo) {
+            navigateTo("/home");
+          } else {
+            //@ts-ignore
+            window.WebApp.close();
+          }
         } else if (progress === 2) {
           setSpeed(50);
         } else if (progress === 50) {
@@ -30,8 +41,26 @@ const Loading = ({ navigate = false }: Props) => {
   }, [progress]);
 
   useEffect(() => {
-    //@ts-ignore
-    console.log(window.Bale);
+    axios
+      .post<{ avatarUrl: string }>("https://api.ble.ir/api/v1/LoadUser", {
+        userID: userData.id,
+      })
+      .then((res) => {
+        const data = res.data;
+        if (data.avatarUrl === "") {
+          dispatch(
+            authActions.setAvatarUrl(
+              "https://play-lh.googleusercontent.com/KE0R9mIrxZ37mTGD6IWW0Rjplj0bQrrencXfW9-jTAP-1MvFa6qNal8I6ufwYb2MDNo=w240-h480-rw"
+            )
+          );
+        } else {
+          dispatch(authActions.setAvatarUrl(data.avatarUrl));
+        }
+      })
+      .catch(() => {
+        //@ts-ignore
+        window.WebApp.close();
+      });
   });
 
   return (
