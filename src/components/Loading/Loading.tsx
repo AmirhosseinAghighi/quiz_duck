@@ -8,6 +8,7 @@ import axios from "axios";
 import { authActions } from "../../slices/user/user.slice";
 import useLogger from "../../hooks/useLogger";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../../constants";
 
 interface Props {
   navigate?: boolean;
@@ -47,7 +48,7 @@ const Loading = ({ navigate = false }: Props) => {
   useEffect(() => {
     axios
       .post<{ user: { avatarUrl: string } }>(
-        "https://88e7-23-157-40-95.ngrok-free.app/proxy/load-user",
+        `${BASE_URL}/proxy/load-user`,
         {
           id: userData.id,
         }

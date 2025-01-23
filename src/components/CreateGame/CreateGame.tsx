@@ -6,6 +6,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { gameModeSelector } from "../../slices/room/room.selector";
 import { userSelector } from "../../slices/user/user.selector";
+import { BASE_URL } from "../../constants";
 
 // const Categories = {
 //   ["sport"]: {
@@ -159,7 +160,7 @@ const CreateGame = () => {
     }
 
     axios
-      .post("duck.farbod.tech/create-room", {
+      .post(`${BASE_URL}/create-room`, {
         max_players: gameMode === "2v2" ? 2 : 1000,
         creator_id: userData.id,
         duration: selectedTime,
