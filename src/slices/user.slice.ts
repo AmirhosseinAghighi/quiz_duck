@@ -7,6 +7,8 @@ const data = window.Bale.initData.user ?? {
   first_name: "",
   id: 0,
   username: "",
+  photo:
+    "https://play-lh.googleusercontent.com/KE0R9mIrxZ37mTGD6IWW0Rjplj0bQrrencXfW9-jTAP-1MvFa6qNal8I6ufwYb2MDNo=w240-h480-rw",
 };
 
 interface AuthSlice {

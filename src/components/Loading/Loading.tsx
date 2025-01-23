@@ -53,11 +53,7 @@ const Loading = ({ navigate = false }: Props) => {
       .then((res) => {
         const data = res.data.user;
         if (data.avatarUrl === "") {
-          dispatch(
-            authActions.setAvatarUrl(
-              "https://play-lh.googleusercontent.com/KE0R9mIrxZ37mTGD6IWW0Rjplj0bQrrencXfW9-jTAP-1MvFa6qNal8I6ufwYb2MDNo=w240-h480-rw"
-            )
-          );
+          dispatch(authActions.setAvatarUrl("duck.farbod.tech"));
         } else {
           dispatch(authActions.setAvatarUrl(data.avatarUrl));
         }
