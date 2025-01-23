@@ -7,6 +7,7 @@ import { userSelector } from "../../slices/user/user.selector";
 import axios from "axios";
 import { authActions } from "../../slices/user/user.slice";
 import useLogger from "../../hooks/useLogger";
+import { toast } from "react-toastify";
 
 interface Props {
   navigate?: boolean;
@@ -28,8 +29,9 @@ const Loading = ({ navigate = false }: Props) => {
           if (userData.photo) {
             navigateTo("/home");
           } else {
+            toast.error("خطا در دریافت اطلاعات");
             //@ts-ignore
-            window.Bale.WebApp.close();
+            // window.Bale.WebApp.close();
           }
         } else if (progress === 2) {
           setSpeed(50);
@@ -60,8 +62,9 @@ const Loading = ({ navigate = false }: Props) => {
       })
       .catch((err) => {
         debug(err.message);
+        toast.error("خطا در اتصال به سرور");
         //@ts-ignore
-        window.Bale.WebApp.close();
+        // window.Bale.WebApp.close();
       });
   }, []);
 
