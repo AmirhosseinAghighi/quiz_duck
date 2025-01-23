@@ -3,9 +3,18 @@ import { RootState } from "../../store";
 
 export type gameMode = "2v2" | "group";
 
+export interface gameData {
+  id: string;
+  current_players: number;
+  host_id: number;
+  max_players: number;
+  status: "waiting" | "ready" | "active";
+}
+
 interface RoomSlice {
-  roomID?: string;
   gameMode?: gameMode;
+  gameData?: gameData;
+  gameStartTime?: number;
 }
 
 const initialState: RoomSlice = {};
@@ -17,13 +26,29 @@ const roomSlice = createSlice({
     setGameMode(state, action: PayloadAction<gameMode>) {
       state.gameMode = action.payload;
     },
-    setRoomID(state, action: PayloadAction<string>) {
-      state.roomID = action.payload;
+    setGameData(state, action: PayloadAction<RoomSlice["gameData"]>) {
+      const data = action.payload;
+      if (data) {
+        state.gameData = {
+          id: data.id,
+          current_players: data.current_players,
+          host_id: data.host_id,
+          max_players: data.max_players,
+          status: data.status,
+        };
+      }
+    },
+    setGameStatus(state, action: PayloadAction<gameData["status"]>) {
+      if (!state.gameData) return;
+      state.gameData.status = action.payload;
+    },
+    setGameStartTime(state, action: PayloadAction<number>) {
+      state.gameStartTime = action.payload;
     },
   },
 });
 
-export const rooomActions = {
+export const roomActions = {
   ...roomSlice.actions,
 };
 export const RoomReducer = roomSlice.reducer;

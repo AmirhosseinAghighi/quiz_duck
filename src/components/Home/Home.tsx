@@ -3,14 +3,14 @@ import Profile from "./Components/Profile";
 import Reports from "./Components/Reports";
 import CreateGameCards from "./Components/GameCards/CreateGameCards";
 import { useNavigate } from "react-router-dom";
-import { gameMode, rooomActions } from "../../slices/room/room.slice";
+import { gameMode, roomActions } from "../../slices/room/room.slice";
 import { useDispatch } from "react-redux";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const startCreatingGame = (mode: gameMode) => {
-    dispatch(rooomActions.setGameMode(mode));
+    dispatch(roomActions.setGameMode(mode));
     navigate("/create");
   };
 

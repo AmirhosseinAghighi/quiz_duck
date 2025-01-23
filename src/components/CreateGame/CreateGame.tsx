@@ -3,10 +3,13 @@ import Category from "./Components/Category";
 import SettingInput from "../SettingInput/SettingInput";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { gameModeSelector } from "../../slices/room/room.selector";
 import { userSelector } from "../../slices/user/user.selector";
 import { BASE_URL } from "../../constants";
+import clsx from "clsx";
+import { gameData, roomActions } from "../../slices/room/room.slice";
+import { useNavigate } from "react-router-dom";
 
 // const Categories = {
 //   ["sport"]: {
@@ -150,28 +153,36 @@ const CreateGame = () => {
   const [selectedTime, setSelectedTime] = useState<number | string>(10);
   const [selectedCount, setSelectedCount] = useState<number | string>(5);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
   const gameMode = useSelector(gameModeSelector);
   const userData = useSelector(userSelector);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
+    if (loading) return;
     if (selectedCategories.length === 0) {
       toast.error("لطفا حداقل یک دسته بندی را انتخاب کنید");
       return;
     }
 
+    setLoading(true);
+
     axios
-      .post(`${BASE_URL}/create-room`, {
+      .post<gameData>(`${BASE_URL}/create-room`, {
         max_players: gameMode === "2v2" ? 2 : 1000,
         creator_id: userData.id,
         duration: selectedTime,
         category: selectedCategories[0],
       })
       .then((res) => {
-        console.log(res.data);
+        dispatch(roomActions.setGameData(res.data));
+        navigate("/lobby");
       })
       .catch(() => {
         toast.error("خطا در اتصال به سرور");
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -214,7 +225,10 @@ const CreateGame = () => {
       </div>
 
       <button
-        className="bg-main_pink mt-10 w-full text-white rounded-3xl py-4 font-bold text-xl"
+        className={clsx(
+          "bg-main_pink mt-10 w-full text-white rounded-3xl py-4 font-bold text-xl",
+          { ["bg-main_blue cursor-not-allowed"]: loading }
+        )}
         onClick={handleSubmit}
       >
         شروع

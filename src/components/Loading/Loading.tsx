@@ -47,16 +47,17 @@ const Loading = ({ navigate = false }: Props) => {
 
   useEffect(() => {
     axios
-      .post<{ user: { avatarUrl: string } }>(
-        `${BASE_URL}/proxy/load-user`,
-        {
-          id: userData.id,
-        }
-      )
+      .post<{ user: { avatarUrl: string } }>(`${BASE_URL}/proxy/load-user`, {
+        id: userData.id,
+      })
       .then((res) => {
         const data = res.data.user;
         if (data.avatarUrl === "") {
-          dispatch(authActions.setAvatarUrl("duck.farbod.tech"));
+          dispatch(
+            authActions.setAvatarUrl(
+              "https://play-lh.googleusercontent.com/KE0R9mIrxZ37mTGD6IWW0Rjplj0bQrrencXfW9-jTAP-1MvFa6qNal8I6ufwYb2MDNo=w240-h480-rw"
+            )
+          );
         } else {
           dispatch(authActions.setAvatarUrl(data.avatarUrl));
         }
