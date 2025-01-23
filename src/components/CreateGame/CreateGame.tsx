@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Category from "./Components/Category";
-import { title } from "process";
 import SettingInput from "../SettingInput/SettingInput";
 
 const Categories = {
@@ -97,7 +96,7 @@ const CreateGame = () => {
     <div className="bg-main_yellow flex flex-col justify-center items-center p-4 px-4 rounded-xl">
       <div className="flex flex-wrap justify-center">
         {categoriesArray.map((category) => (
-          <Category
+          <Category 
             title={category.title}
             emoji={category.emoji}
             id={category.id}
