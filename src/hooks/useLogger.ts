@@ -4,9 +4,9 @@ type LogLevel = "error" | "info" | "debug";
 
 const useLogger = () => {
   const shouldLog = useCallback((level: LogLevel): boolean => {
-    if (process.env.NODE_ENV === "production") {
-      return false;
-    }
+    // if (process.env.NODE_ENV === "production") {
+    //   return false;
+    // }
     return true;
   }, []);
 
