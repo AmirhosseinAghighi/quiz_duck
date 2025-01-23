@@ -45,14 +45,14 @@ const Loading = ({ navigate = false }: Props) => {
 
   useEffect(() => {
     axios
-      .post<{ avatarUrl: string }>(
+      .post<{ user: { avatarUrl: string } }>(
         "https://88e7-23-157-40-95.ngrok-free.app/proxy/load-user",
         {
           id: userData.id,
         }
       )
       .then((res) => {
-        const data = res.data;
+        const data = res.data.user;
         console.log("!@! 2", res, data, res.data, data.avatarUrl);
         if (data.avatarUrl === "") {
           dispatch(
