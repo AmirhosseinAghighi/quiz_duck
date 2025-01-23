@@ -20,7 +20,7 @@ const SettingInput = ({ title, options, onChange, selected }: Props) => {
   return (
     <div className="mt-4 flex justify-between w-full select-none">
       <p className="text-xl">{title}</p>
-      <div className="bg-black bg-opacity-60 rounded-full flex flex-row-reverse shadow-md">
+      <div className="bg-black bg-opacity-50 rounded-full flex flex-row-reverse shadow-md">
         {options.map((option) => (
           <p
             onClick={() => onChange(option.value)}

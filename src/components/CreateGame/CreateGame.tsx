@@ -95,8 +95,11 @@ const CreateGame = () => {
   return (
     <div className="bg-main_yellow flex flex-col justify-center items-center p-4 px-4 rounded-xl">
       <div className="flex flex-wrap justify-center">
+        <h1 className="font text-md mb-2">
+          لطفا دسته بندی های سوالات را انتخاب کنید
+        </h1>
         {categoriesArray.map((category) => (
-          <Category 
+          <Category
             title={category.title}
             emoji={category.emoji}
             id={category.id}
@@ -127,7 +130,7 @@ const CreateGame = () => {
         />
       </div>
 
-      <button className="bg-main_pink mt-20 w-full text-white rounded-full py-4 font-bold text-xl">
+      <button className="bg-main_pink mt-10 w-full text-white rounded-3xl py-4 font-bold text-xl">
         شروع
       </button>
     </div>
