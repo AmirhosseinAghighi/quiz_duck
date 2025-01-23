@@ -48,7 +48,7 @@ const Loading = ({ navigate = false }: Props) => {
       .post<{ avatarUrl: string }>(
         "https://88e7-23-157-40-95.ngrok-free.app/proxy/load-user",
         {
-          userID: userData.id,
+          id: userData.id,
         }
       )
       .then((res) => {
