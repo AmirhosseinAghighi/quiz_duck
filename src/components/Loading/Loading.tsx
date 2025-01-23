@@ -21,7 +21,6 @@ const Loading = ({ navigate = false }: Props) => {
   const { debug } = useLogger();
 
   useEffect(() => {
-    console.log("!@!", userData);
     if (navigate) {
       setTimeout(() => {
         setProgress(() => progress + 1);
@@ -53,7 +52,6 @@ const Loading = ({ navigate = false }: Props) => {
       )
       .then((res) => {
         const data = res.data.user;
-        console.log("!@! 2", res, data, res.data, data.avatarUrl);
         if (data.avatarUrl === "") {
           dispatch(
             authActions.setAvatarUrl(
