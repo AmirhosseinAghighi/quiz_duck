@@ -1,1 +1,1 @@
-export const BASE_URL = "duck.farbod.tech";
+export const BASE_URL = "https://duck.farbod.tech";
