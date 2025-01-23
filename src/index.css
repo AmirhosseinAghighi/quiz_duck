@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-pattern{
+    content: "";
+    background-image: url("/src/assets/pattern.svg");
+    animation: patternAnim 20s linear 0s infinite normal forwards;
+}   
+
+@keyframes patternAnim {
+	0% {
+		background-position: 100% 100%;
+	}
+
+	100% {
+		background-position: 0% 0%;
+	}
+}
