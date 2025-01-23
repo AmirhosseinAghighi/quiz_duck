@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { avatarSelector, userSelector } from "../../../slices/user.selector";
+import {
+  avatarSelector,
+  userSelector,
+} from "../../../slices/user/user.selector";
 
 interface Props {
   className?: string;

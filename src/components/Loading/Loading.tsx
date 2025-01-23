@@ -3,9 +3,9 @@ import pattern from "../../assets/pattern.svg";
 import duck from "../../assets/duck-doctor.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userSelector } from "../../slices/user.selector";
+import { userSelector } from "../../slices/user/user.selector";
 import axios from "axios";
-import { authActions } from "../../slices/user.slice";
+import { authActions } from "../../slices/user/user.slice";
 import useLogger from "../../hooks/useLogger";
 
 interface Props {
@@ -79,7 +79,7 @@ const Loading = ({ navigate = false }: Props) => {
         {navigate && (
           <div className="w-3/4 rounded-full h-2 bg-text-gray mt-4 flex flex-row-reverse">
             <div
-              className={`h-2 rounded-full h-2 bg-white`}
+              className={`h-2 rounded-full bg-white`}
               style={{ width: `${progress}%` }}
             ></div>
           </div>

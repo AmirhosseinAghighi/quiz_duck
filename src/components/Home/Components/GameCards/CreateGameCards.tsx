@@ -2,12 +2,7 @@ import React from "react";
 import twoDuck from "../../../../assets/2v2.png";
 import groupDuck from "../../../../assets/group.png";
 import clsx from "clsx";
-
-export type gameMode = "2v2" | "group";
-
-interface Props {
-  mode: "2v2" | "group";
-}
+import { gameMode } from "../../../../slices/room/room.slice";
 
 const Modes = {
   ["2v2"]: {
@@ -22,7 +17,12 @@ const Modes = {
   },
 };
 
-const CreateGameCards = ({ mode }: Props) => {
+interface Props {
+  mode: gameMode;
+  onClick?: () => void;
+}
+
+const CreateGameCards = ({ mode, onClick }: Props) => {
   return (
     <div
       className={clsx("flex mt-8 rounded-xl items-center p-2 cursor-pointer", {
@@ -33,6 +33,7 @@ const CreateGameCards = ({ mode }: Props) => {
         boxShadow:
           "0px 2px 4px 0px rgba(0, 0, 0, 0.25), 0px 0px 4px 2px rgba(0, 0, 0, 0.15) inset",
       }}
+      onClick={onClick}
     >
       <img src={Modes[mode].banner} alt="banner" className={"w-1/2 h-full"} />
       <div className="flex flex-col justify-center text-white mr-4">
