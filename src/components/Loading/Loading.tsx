@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userSelector } from "../../slices/user.selector";
 import axios from "axios";
 import { authActions } from "../../slices/user.slice";
+import useLogger from "../../hooks/useLogger";
 
 interface Props {
   navigate?: boolean;
@@ -17,6 +18,7 @@ const Loading = ({ navigate = false }: Props) => {
   const navigateTo = useNavigate();
   const userData = useSelector(userSelector);
   const dispatch = useDispatch();
+  const { debug } = useLogger();
 
   useEffect(() => {
     if (navigate) {
@@ -57,11 +59,12 @@ const Loading = ({ navigate = false }: Props) => {
           dispatch(authActions.setAvatarUrl(data.avatarUrl));
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        debug(err.message);
         //@ts-ignore
         window.WebApp.close();
       });
-  });
+  }, []);
 
   return (
     <div className="w-full h-[100dvh] bg-pattern bg-sky-blue flex justify-center items-center absolute top-0 left-0">
