@@ -29,6 +29,11 @@ const Loading = ({ navigate = false }: Props) => {
     }
   }, [progress]);
 
+  useEffect(() => {
+    //@ts-ignore
+    console.log(window.Bale);
+  });
+
   return (
     <div className="w-full h-[100dvh] bg-pattern bg-sky-blue flex justify-center items-center absolute top-0 left-0">
       <div className="flex flex-col justify-center items-center">
