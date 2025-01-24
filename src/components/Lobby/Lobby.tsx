@@ -36,6 +36,7 @@ const Lobby = () => {
         .then((res) => {
           setTimeRemaining(Math.floor(res.data.time_remaining));
           setPlayersList(res.data.player_list);
+          console.log(res.data.player_list, res.data);
           setStatus(res.data.status);
           if (res.data.status === "ready") {
             setTimeRemaining(0);
