@@ -39,7 +39,7 @@ const UserCard = ({ userID }: Props) => {
       .catch((err) => {
         debug(err.message);
       });
-  }, []);
+  }, [userID]);
 
   if (!userAvatar && !userFirstName) {
     return <></>;
