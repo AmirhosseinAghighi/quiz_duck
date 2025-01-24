@@ -33,7 +33,7 @@ const Game = () => {
 
   const question = useMemo(() => {
     return questions[currentQuestionIndex];
-  }, []);
+  }, [currentQuestionIndex]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -55,7 +55,7 @@ const Game = () => {
     if (currentQuestionIndex + 1 < questions.length) {
       setDisable(true);
       setTimeout(() => {
-        setCurrentQuestionIndex((prev) => prev + 1);
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
         setStartedTime(new Date().getTime());
         setTimeLeft(100);
         setDisable(false);
@@ -78,7 +78,9 @@ const Game = () => {
             selected_option: answer,
           }
         )
-        .then(() => {
+        .then((res) => {
+          console.log("!@!", res.data.correct);
+          setCorrectAnswer(res.data.correct);
           if (questionIndex === currentQuestionIndex) {
             nextQuestion();
           }
