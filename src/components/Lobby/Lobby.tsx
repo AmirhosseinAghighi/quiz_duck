@@ -112,7 +112,7 @@ const Lobby = () => {
         )}
 
         {playersList.map((userID) => (
-          <div className="flex flex-col justify-start items-center w-1/2 mt-4">
+          <div className="flex flex-col justify-start items-center w-3/4 mt-4">
             <UserCard userID={userID} />
           </div>
         ))}
