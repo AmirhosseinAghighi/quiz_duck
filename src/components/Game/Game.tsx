@@ -114,9 +114,9 @@ const Game = () => {
             "w-full bg-dark-sky-blue p-2 rounded-lg m-4 cursor-pointer",
             {
               ["bg-gray-700 bg-opacity-45"]: disable,
-              ["bg-main_green text-black"]:
-                selectedAnswer === "A" && selectedAnswer === correctAnswer,
-              ["bg-main_red"]:
+              ["bg-main_green text-black !bg-opacity-100"]:
+                correctAnswer === "A",
+              ["bg-main_red !bg-opacity-100"]:
                 correctAnswer &&
                 selectedAnswer === "A" &&
                 selectedAnswer !== correctAnswer,
@@ -131,9 +131,9 @@ const Game = () => {
             "w-full bg-dark-sky-blue p-2 rounded-lg m-4 cursor-pointer",
             {
               ["bg-gray-700 bg-opacity-45"]: disable,
-              ["bg-main_green text-black"]:
-                selectedAnswer === "B" && selectedAnswer === correctAnswer,
-              ["bg-main_red"]:
+              ["bg-main_green text-black !bg-opacity-100"]:
+                correctAnswer === "B",
+              ["bg-main_red !bg-opacity-100"]:
                 correctAnswer &&
                 selectedAnswer === "B" &&
                 selectedAnswer !== correctAnswer,
@@ -148,9 +148,9 @@ const Game = () => {
             "w-full bg-dark-sky-blue p-2 rounded-lg m-4 cursor-pointer",
             {
               ["bg-gray-700 bg-opacity-45"]: disable,
-              ["bg-main_green text-black"]:
-                selectedAnswer === "C" && selectedAnswer === correctAnswer,
-              ["bg-main_red"]:
+              ["bg-main_green text-black !bg-opacity-100"]:
+                correctAnswer === "C",
+              ["bg-main_red !bg-opacity-100"]:
                 correctAnswer &&
                 selectedAnswer === "C" &&
                 selectedAnswer !== correctAnswer,
@@ -166,9 +166,9 @@ const Game = () => {
               "w-full bg-dark-sky-blue p-2 rounded-lg m-4 cursor-pointer",
               {
                 ["bg-gray-700 bg-opacity-45"]: disable,
-                ["bg-main_green text-black"]:
-                  selectedAnswer === "D" && selectedAnswer === correctAnswer,
-                ["bg-main_red"]:
+                ["bg-main_green text-black !bg-opacity-100"]:
+                  correctAnswer === "D",
+                ["bg-main_red !bg-opacity-100"]:
                   correctAnswer &&
                   selectedAnswer === "D" &&
                   selectedAnswer !== correctAnswer,
