@@ -45,6 +45,12 @@ const roomSlice = createSlice({
     setGameStartTime(state, action: PayloadAction<number>) {
       state.gameStartTime = action.payload;
     },
+    setGameID(state, action: PayloadAction<gameData["id"]>) {
+      if (!state.gameData) {
+        state.gameData = {} as gameData;
+      }
+      state.gameData.id = action.payload;
+    },
   },
 });
 

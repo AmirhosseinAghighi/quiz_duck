@@ -4,6 +4,7 @@ import MiniApp from "./MiniApp";
 import Loading from "./components/Loading/Loading";
 import AppLayout from "./components/AppLayout";
 import Lobby from "./components/Lobby/Lobby";
+import Join from "./components/Join/Join";
 
 const Home = lazy(() => import("./components/Home/Home"));
 const CreateGame = lazy(() => import("./components/CreateGame/CreateGame"));
@@ -62,6 +63,14 @@ const router = createBrowserRouter([
             element: (
               <Suspense fallback={<Loading />}>
                 <CreateGame />
+              </Suspense>
+            ),
+          },
+          {
+            path: "/join",
+            element: (
+              <Suspense fallback={<Loading />}>
+                <Join />
               </Suspense>
             ),
           },

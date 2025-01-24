@@ -6,10 +6,11 @@ import axios from "axios";
 import { BASE_URL } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { gameDataSelector } from "../../slices/room/room.selector";
-import { roomActions } from "../../slices/room/room.slice";
+import { gameData, roomActions } from "../../slices/room/room.slice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { userSelector } from "../../slices/user/user.selector";
+import { FaCopy } from "react-icons/fa";
 
 const Lobby = () => {
   const latinToPersian = useLatinToPersian();
@@ -20,19 +21,34 @@ const Lobby = () => {
   const [timeRemaining, setTimeRemaining] = useState<number | undefined>(
     undefined
   );
+  const [playersList, setPlayersList] = useState<number[]>([]);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
+    let failureCounter = 0;
     const interval = setInterval(() => {
       axios
-        .get(`${BASE_URL}/room-status/${gameData?.id ?? "95922072"}`)
+        .get<{
+          player_list: number[];
+          time_remaining: number;
+          status: gameData["status"];
+        }>(`${BASE_URL}/room-status/${gameData?.id ?? "313a897d"}`)
         .then((res) => {
           setTimeRemaining(Math.floor(res.data.time_remaining));
+          setPlayersList(res.data.player_list);
+          setStatus(res.data.status);
           if (res.data.status === "ready") {
+            setTimeRemaining(0);
             clearInterval(interval);
           }
         })
         .catch(() => {
-          toast.error("خطا در اتصال به سرور");
+          failureCounter++;
+          if (failureCounter >= 3) {
+            toast.error("خطا در اتصال به سرور");
+            clearInterval(interval);
+            // navigate("/home");
+          }
         });
     }, 1000);
 
@@ -57,6 +73,11 @@ const Lobby = () => {
       });
   };
 
+  const handleCopyCode = () => {
+    if (!gameData) return;
+    navigator.clipboard.writeText(gameData?.id);
+  };
+
   return (
     <div className="w-full h-[100dvh] bg-pattern bg-sky-blue flex justify-center items-center absolute top-0 left-0">
       <div className="flex flex-col justify-center items-center">
@@ -67,11 +88,25 @@ const Lobby = () => {
             : "در حال دریافت اطلاعات"}
         </h1>
 
-        {/* <div className="flex flex-col justify-start items-center">
-          <UserCard />
-        </div> */}
+        {gameData && status === "waiting" && (
+          <div
+            className="bg-black bg-opacity-50 p-2 rounded-md flex flex-row-reverse justify-center items-center gap-2 mt-4 cursor-copy"
+            onClick={handleCopyCode}
+          >
+            <p className="bg-white bg-opacity-50 px-4 rounded-md">
+              {gameData?.id}
+            </p>
+            <FaCopy className="text-white" />
+          </div>
+        )}
 
-        {userData.id === gameData?.host_id && (
+        {playersList.map((userID) => (
+          <div className="flex flex-col justify-start items-center">
+            <UserCard userID={userID} />
+          </div>
+        ))}
+
+        {userData.id === gameData?.host_id && status === "ready" && (
           <button
             className="px-4 pb-2 py-1 text-xl text-white bg-main_pink absolute bottom-10 rounded-lg"
             onClick={handleStartGame}
