@@ -15,6 +15,7 @@ const UserCard = ({ userID }: Props) => {
   const { debug } = useLogger();
   const [userAvatar, setUserAvatar] = useState<string | undefined>();
   const [userFirstName, setUserFirstName] = useState<string | undefined>();
+  console.log("!@!", userID);
 
   useEffect(() => {
     axios
