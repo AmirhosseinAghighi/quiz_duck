@@ -21,6 +21,7 @@ const Join = () => {
     axios
       .post(`${BASE_URL}/join-room`, {
         username: userData.username,
+        user_id: userData.id,
         room_id: code,
       })
       .then((res) => {
