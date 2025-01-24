@@ -68,7 +68,7 @@ const Winner = () => {
   }, [isGameFinished]);
 
   return (
-    <div className="w-full h-[100dvh] bg-pattern bg-sky-blue flex flex-col justify-center items-center absolute top-0 left-0">
+    <div className="w-full h-[100dvh] bg-pattern bg-sky-blue flex flex-col justify-center items-center absolute top-0 left-0 px-4">
       {scores && scores.length > 0 ? (
         <>
           {scores.map((data) => (
