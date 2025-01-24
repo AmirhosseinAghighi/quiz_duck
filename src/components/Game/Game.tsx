@@ -19,7 +19,7 @@ const Game = () => {
   const questions = useSelector(gameQuestionsSelector);
   const questionDuration = useSelector(gameQuestionDuration);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [startedTime, setStartedTime] = useState(Date.now());
+  const [startedTime, setStartedTime] = useState(new Date().getTime());
   const [timeLeft, setTimeLeft] = useState(100);
   const [disable, setDisable] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<"A" | "B" | "C" | "D">();
@@ -31,15 +31,16 @@ const Game = () => {
     return <Navigate to={"/home"} />;
   }
 
-  const question: Question = useMemo(() => {
+  const question = useMemo(() => {
     return questions[currentQuestionIndex];
   }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const currentTime = Date.now();
+      const currentTime = new Date().getTime();
       const diff = currentTime - startedTime;
-      if (diff >= (questionDuration ?? 10 * 1000)) {
+      if (diff >= (questionDuration ?? 10) * 1000) {
+        console.log("next", diff, currentTime, startedTime);
         nextQuestion();
       } else {
         setTimeLeft(100 - diff / (10 * (questionDuration ?? 10)));
@@ -55,7 +56,7 @@ const Game = () => {
       setDisable(true);
       setTimeout(() => {
         setCurrentQuestionIndex((prev) => prev + 1);
-        setStartedTime(Date.now());
+        setStartedTime(new Date().getTime());
         setTimeLeft(100);
         setDisable(false);
       }, 1000);

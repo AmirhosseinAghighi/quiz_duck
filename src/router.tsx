@@ -53,14 +53,6 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "/game",
-            element: (
-              <Suspense fallback={<Loading />}>
-                <Game />
-              </Suspense>
-            ),
-          },
-          {
             path: "/winner",
             element: (
               <Suspense fallback={<Loading />}>
@@ -73,6 +65,20 @@ const router = createBrowserRouter([
             element: (
               <Suspense fallback={<Loading />}>
                 <Join />
+              </Suspense>
+            ),
+          },
+        ],
+      },
+      {
+        path: "/",
+        element: <AppLayout withPatterns />,
+        children: [
+          {
+            path: "/game",
+            element: (
+              <Suspense fallback={<Loading />}>
+                <Game />
               </Suspense>
             ),
           },
