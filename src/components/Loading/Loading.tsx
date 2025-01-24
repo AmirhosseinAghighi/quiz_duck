@@ -79,7 +79,7 @@ const Loading = ({ navigate = false }: Props) => {
           آیا میدانستید؟
         </h2>
         <p className="text-right w-1/2 font-bold text-text-gray text-md">
-          لورم ایپسوم، بله این یک متن من در آوردی است !
+          می‌توانید پس از اتمام یک کلکل نتیجه آن را در ربات مشاهده کنید!{" "}
         </p>
         {navigate && (
           <div className="w-3/4 rounded-full h-2 bg-text-gray mt-4 flex flex-row-reverse">
