@@ -17,7 +17,10 @@ const Join = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!code) setGameNotFound(true);
+    if (!code) {
+      setGameNotFound(true);
+      return;
+    }
     axios
       .post(`${BASE_URL}/join-room`, {
         username: userData.username,
@@ -25,10 +28,6 @@ const Join = () => {
         room_id: code,
       })
       .then((res) => {
-        if (!code) {
-          setGameNotFound(true);
-          return;
-        }
         dispatch(roomActions.setGameID(code));
         setGameNotFound(false);
         navigate("/lobby");
