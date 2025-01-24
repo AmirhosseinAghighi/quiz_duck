@@ -59,6 +59,8 @@ const Game = () => {
         setStartedTime(new Date().getTime());
         setTimeLeft(100);
         setDisable(false);
+        setCorrectAnswer(undefined);
+        setSelectedAnswer(undefined);
       }, 1000);
     } else {
       navigate("/winner");
@@ -71,7 +73,7 @@ const Game = () => {
       setSelectedAnswer(answer);
       const questionIndex = currentQuestionIndex;
       axios
-        .post<{ message: "string"; correct: "A" | "B" | "C" | "D" }>(
+        .post<{ is_correct: boolean; correct: "A" | "B" | "C" | "D" }>(
           `${BASE_URL}/submit-answer/${gameData?.id}/${userData.id}`,
           {
             question_id: question.id,
