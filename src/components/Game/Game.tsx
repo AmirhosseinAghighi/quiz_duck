@@ -63,7 +63,9 @@ const Game = () => {
         setSelectedAnswer(undefined);
       }, 1000);
     } else {
-      navigate("/winner");
+      setTimeout(() => {
+        navigate("/winner");
+      }, 1000);
     }
   };
 
