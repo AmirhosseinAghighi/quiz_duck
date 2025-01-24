@@ -10,7 +10,7 @@ import { gameData, roomActions } from "../../slices/room/room.slice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { userSelector } from "../../slices/user/user.selector";
-import { FaCopy } from "react-icons/fa";
+import { FaShare } from "react-icons/fa";
 
 const Lobby = () => {
   const latinToPersian = useLatinToPersian();
@@ -73,9 +73,20 @@ const Lobby = () => {
       });
   };
 
-  const handleCopyCode = () => {
-    if (!gameData) return;
-    navigator.clipboard.writeText(gameData?.id);
+  const handleShareGameId = async (gameId: string) => {
+    const shareData = {
+      title: "کد بازی",
+      text: `همین حالا با من بازی کن! کد بازی کوییز داک: ${gameId}`,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(gameId);
+        toast.info("کد بازی کپی شد");
+      }
+    } catch (error) {}
   };
 
   return (
@@ -91,12 +102,12 @@ const Lobby = () => {
         {gameData && status === "waiting" && (
           <div
             className="bg-black bg-opacity-50 p-2 rounded-md flex flex-row-reverse justify-center items-center gap-2 mt-4 cursor-copy"
-            onClick={handleCopyCode}
+            onClick={() => handleShareGameId(gameData.id)}
           >
             <p className="bg-white bg-opacity-50 px-4 rounded-md">
-              {gameData?.id}
+              {gameData.id}
             </p>
-            <FaCopy className="text-white" />
+            <FaShare className="text-white" />
           </div>
         )}
 
