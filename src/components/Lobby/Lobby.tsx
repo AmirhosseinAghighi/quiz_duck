@@ -65,7 +65,7 @@ const Lobby = () => {
     if (!gameData) return;
     axios
       .get<{ question_duration: number; questions: Question[] }>(
-        `${BASE_URL}//room-questions/${gameData?.id}`
+        `${BASE_URL}/room-questions/${gameData?.id}`
       )
       .then((res) => {
         const data = res.data;
