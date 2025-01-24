@@ -37,7 +37,7 @@ const Join = () => {
       });
   }, [code, userData]);
 
-  if (!gameNotFound) {
+  if (gameNotFound) {
     toast.error("بازی پیدا نشد");
     return <Navigate to={"/home"} />;
   }
