@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Profile from "./Components/Profile";
 import Reports from "./Components/Reports";
 import CreateGameCards from "./Components/GameCards/CreateGameCards";
 import { useNavigate } from "react-router-dom";
 import { gameMode, roomActions } from "../../slices/room/room.slice";
 import { useDispatch } from "react-redux";
+import { FaShare } from "react-icons/fa";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ const Home = () => {
     dispatch(roomActions.setGameMode(mode));
     navigate("/create");
   };
+
+  const [code, setCode] = useState("");
 
   return (
     <>
@@ -26,6 +29,18 @@ const Home = () => {
           mode="group"
           onClick={() => startCreatingGame("group")}
         />
+        <div className="mt-4  px-2 py-1 rounded-full bg-black bg-opacity-25 flex flex-row-reverse justify-between items-center">
+          <input
+            className="w-full py-2 bg-transparent h-full"
+            placeholder="کد بازی"
+            type="text"
+            onChange={(e) => setCode(e.target.value)}
+          />
+          <FaShare
+            className="text-white mx-4 w-10 h-full"
+            onClick={() => navigate(`/join?code=${code}`)}
+          />
+        </div>
       </div>
     </>
   );

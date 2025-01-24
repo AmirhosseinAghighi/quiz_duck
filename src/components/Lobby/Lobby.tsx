@@ -136,7 +136,7 @@ const Lobby = () => {
         {userData.id === gameData?.host_id && status === "ready" && (
           <button
             className="px-4 pb-2 py-1 text-xl text-white bg-main_pink absolute bottom-10 rounded-lg"
-            onClick={handleStartGame}
+          onClick={handleStartGame}
           >
             شروع بازی
           </button>
