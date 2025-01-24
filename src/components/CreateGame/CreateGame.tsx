@@ -175,7 +175,7 @@ const CreateGame = () => {
         creator_username: userData.username,
         duration: selectedTime,
         category: selectedCategories[0],
-        correct_answer: selectedCount,
+        question_count: selectedCount,
       })
       .then((res) => {
         dispatch(roomActions.setGameData(res.data));
