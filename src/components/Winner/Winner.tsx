@@ -30,6 +30,8 @@ const Winner = () => {
         }>(`${BASE_URL}/room-status/${gameData?.id ?? "4904d30f"}`)
         .then(({ data }) => {
           if (data.status === "completed") {
+            setIsGameFinished(true);
+            clearInterval(interval);
           } else if (data.status !== "active") {
             clearInterval(interval);
             toast.error("خطا در سرور");
