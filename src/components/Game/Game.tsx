@@ -73,7 +73,7 @@ const Game = () => {
       setSelectedAnswer(answer);
       const questionIndex = currentQuestionIndex;
       axios
-        .post<{ is_correct: boolean; correct: "A" | "B" | "C" | "D" }>(
+        .post<{ is_correct: boolean; correct_answer: "A" | "B" | "C" | "D" }>(
           `${BASE_URL}/submit-answer/${gameData?.id}/${userData.id}`,
           {
             question_id: question.id,
@@ -81,8 +81,8 @@ const Game = () => {
           }
         )
         .then((res) => {
-          console.log("!@!", res.data.correct);
-          setCorrectAnswer(res.data.correct);
+          console.log("!@!", res.data.correct_answer);
+          setCorrectAnswer(res.data.correct_answer);
           if (questionIndex === currentQuestionIndex) {
             nextQuestion();
           }
