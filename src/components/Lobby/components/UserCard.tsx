@@ -8,9 +8,10 @@ import { toast } from "react-toastify";
 
 interface Props {
   userID: number;
+  score?: number;
 }
 
-const UserCard = ({ userID }: Props) => {
+const UserCard = ({ userID, score }: Props) => {
   const dispatch = useDispatch();
   const { debug } = useLogger();
   const [userAvatar, setUserAvatar] = useState<string | undefined>();
@@ -45,13 +46,18 @@ const UserCard = ({ userID }: Props) => {
   }
 
   return (
-    <div className="bg-black bg-opacity-50 text-white flex rounded-full w-full gap-2 justify-start items-center mt-1">
+    <div
+      className={`bg-black bg-opacity-50 text-white flex rounded-full w-full gap-2 ${
+        score ? "justify-between" : "justify-start"
+      } items-center mt-1`}
+    >
       <img
         src={userAvatar}
         alt="player-profile"
         className="w-[40px] h-[40px] rounded-full"
       />
       <p>{userFirstName}</p>
+      {score && <p className="pl-2">{score}</p>}
     </div>
   );
 };

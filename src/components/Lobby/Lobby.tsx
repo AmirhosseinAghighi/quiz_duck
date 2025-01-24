@@ -51,7 +51,7 @@ const Lobby = () => {
           if (failureCounter >= 3) {
             toast.error("خطا در اتصال به سرور");
             clearInterval(interval);
-            // navigate("/home");
+            navigate("/home");
           }
         });
     }, 1000);

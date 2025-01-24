@@ -8,7 +8,7 @@ export interface gameData {
   current_players: number;
   host_id: number;
   max_players: number;
-  status: "waiting" | "ready" | "active";
+  status: "waiting" | "ready" | "active" | "completed";
 }
 
 export interface Question {
