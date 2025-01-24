@@ -5,6 +5,8 @@ import Loading from "./components/Loading/Loading";
 import AppLayout from "./components/AppLayout";
 import Lobby from "./components/Lobby/Lobby";
 import Join from "./components/Join/Join";
+import Game from "./components/Game/Game";
+import Winner from "./components/Winner/Winner";
 
 const Home = lazy(() => import("./components/Home/Home"));
 const CreateGame = lazy(() => import("./components/CreateGame/CreateGame"));
@@ -54,7 +56,7 @@ const router = createBrowserRouter([
             path: "/game",
             element: (
               <Suspense fallback={<Loading />}>
-                <CreateGame />
+                <Game />
               </Suspense>
             ),
           },
@@ -62,7 +64,7 @@ const router = createBrowserRouter([
             path: "/winner",
             element: (
               <Suspense fallback={<Loading />}>
-                <CreateGame />
+                <Winner />
               </Suspense>
             ),
           },

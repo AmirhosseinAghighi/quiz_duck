@@ -6,7 +6,7 @@ import axios from "axios";
 import { BASE_URL } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { gameDataSelector } from "../../slices/room/room.selector";
-import { gameData, roomActions } from "../../slices/room/room.slice";
+import { gameData, Question, roomActions } from "../../slices/room/room.slice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { userSelector } from "../../slices/user/user.selector";
@@ -34,13 +34,16 @@ const Lobby = () => {
           status: gameData["status"];
         }>(`${BASE_URL}/room-status/${gameData?.id ?? "4904d30f"}`)
         .then((res) => {
-          setTimeRemaining(Math.floor(res.data.time_remaining));
           setPlayersList(res.data.player_list);
           console.log(res.data.player_list, res.data);
           setStatus(res.data.status);
           if (res.data.status === "ready") {
             setTimeRemaining(0);
+          } else if (res.data.status === "active") {
             clearInterval(interval);
+            handleGetQuestions();
+          } else {
+            setTimeRemaining(Math.floor(res.data.time_remaining));
           }
         })
         .catch(() => {
@@ -58,17 +61,29 @@ const Lobby = () => {
     };
   }, []);
 
+  const handleGetQuestions = () => {
+    if (!gameData) return;
+    axios
+      .get<{ question_duration: number; questions: Question[] }>(
+        `${BASE_URL}//room-questions/${gameData?.id}`
+      )
+      .then((res) => {
+        const data = res.data;
+        dispatch(roomActions.setGameQuestions(data.questions));
+        dispatch(roomActions.setGameQuestionTimeout(data.question_duration));
+        navigate("/game");
+      })
+      .catch((error) => {
+        toast.error("خطا در اتصال به سرور");
+        navigate("/home");
+      });
+  };
+
   const handleStartGame = () => {
     axios
       .post<{ status: "waiting" | "ready" | "active"; start_time: number }>(
         `${BASE_URL}/start-game/${gameData?.id}`
       )
-      .then((res) => {
-        dispatch(roomActions.setGameStatus(res.data.status));
-        dispatch(roomActions.setGameStartTime(res.data.start_time));
-        //TODO: get questions after starting game
-        navigate("/question");
-      })
       .catch(() => {
         toast.error("خطا در اتصال به سرور");
       });
@@ -114,7 +129,6 @@ const Lobby = () => {
 
         {playersList.map((userID) => (
           <div className="flex flex-col justify-start items-center w-3/4 mt-4">
-            <p>{userID}</p>
             <UserCard userID={userID} />
           </div>
         ))}
