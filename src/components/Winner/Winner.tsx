@@ -58,7 +58,7 @@ const Winner = () => {
       axios
         .get<userScore[]>(`${BASE_URL}/room-leaderboard/${gameData.id}`)
         .then(({ data }) => {
-          setScores(data.sort((a, b) => a.score - b.score));
+          setScores(data.sort((a, b) => b.score - a.score));
         })
         .catch(() => {
           toast.error("خطا در اتصال به سرور");
