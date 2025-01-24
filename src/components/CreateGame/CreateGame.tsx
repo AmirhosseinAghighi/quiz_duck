@@ -172,6 +172,7 @@ const CreateGame = () => {
       .post<gameData>(`${BASE_URL}/create-room`, {
         max_players: gameMode === "2v2" ? 2 : 1000,
         creator_id: userData.id,
+        creator_username: userData.username,
         duration: selectedTime,
         category: selectedCategories[0],
       })

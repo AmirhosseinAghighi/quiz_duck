@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
 //@ts-ignore
+console.log(window.Bale.initData.user);
+//@ts-ignore
 const data = window.Bale.initData.user ?? {
   allows_write_to_pm: false,
   first_name: "",
