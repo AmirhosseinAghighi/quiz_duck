@@ -45,8 +45,12 @@ const UserCard = ({ userID }: Props) => {
   }
 
   return (
-    <div className="bg-black bg-opacity-50 text-white flex rounded-full w-1/2">
-      <img src={userAvatar} alt="player-profile" />
+    <div className="bg-black bg-opacity-50 text-white flex rounded-full w-full gap-2 justify-start items-center mt-1">
+      <img
+        src={userAvatar}
+        alt="player-profile"
+        className="w-[40px] h-[40px] rounded-full"
+      />
       <p>{userFirstName}</p>
     </div>
   );

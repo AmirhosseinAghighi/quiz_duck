@@ -32,7 +32,7 @@ const Lobby = () => {
           player_list: number[];
           time_remaining: number;
           status: gameData["status"];
-        }>(`${BASE_URL}/room-status/${gameData?.id ?? "313a897d"}`)
+        }>(`${BASE_URL}/room-status/${gameData?.id ?? "4904d30f"}`)
         .then((res) => {
           setTimeRemaining(Math.floor(res.data.time_remaining));
           setPlayersList(res.data.player_list);
@@ -112,7 +112,7 @@ const Lobby = () => {
         )}
 
         {playersList.map((userID) => (
-          <div className="flex flex-col justify-start items-center">
+          <div className="flex flex-col justify-start items-center w-1/2 mt-4">
             <UserCard userID={userID} />
           </div>
         ))}
