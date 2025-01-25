@@ -36,6 +36,7 @@ const Lobby = () => {
         .then((res) => {
           setPlayersList(res.data.player_list);
           console.log(res.data.player_list, res.data);
+          console.log("!@! 44", userData.id, gameData?.host_id);
           setStatus(res.data.status);
           if (res.data.status === "ready") {
             setTimeRemaining(0);
@@ -136,7 +137,7 @@ const Lobby = () => {
         {userData.id === gameData?.host_id && status === "ready" && (
           <button
             className="px-4 pb-2 py-1 text-xl text-white bg-main_pink absolute bottom-10 rounded-lg"
-          onClick={handleStartGame}
+            onClick={handleStartGame}
           >
             شروع بازی
           </button>

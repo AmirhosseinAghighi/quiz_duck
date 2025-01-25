@@ -77,7 +77,11 @@ const Winner = () => {
 
           <button
             className="px-4 pb-2 py-1 text-xl text-white bg-main_pink absolute bottom-10 rounded-lg"
-            onClick={() => navigate("/home")}
+            onClick={() => {
+              //@ts-ignore
+              window.Bale.WebApp.close();
+              navigate("/home");
+            }}
           >
             برگشت به خانه
           </button>
